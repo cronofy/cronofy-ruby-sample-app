@@ -1,0 +1,23 @@
+<h2>Calendars</h2>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Account Profile</th>
+    <th>Name</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @calendars.each do |calendar| %>
+      <tr>
+        <td>
+          <%= calendar.profile_name %>
+        </td>
+        <td>
+          <%= calendar.calendar_name %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
