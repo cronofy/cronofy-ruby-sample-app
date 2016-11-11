@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cronofy_id: MyString
+  email: MyString
+  name: MyString
+  timezone: MyString
+  cronofy_access_token: MyString
+  cronofy_refresh_token: MyString
+  cronofy_access_token_expiration: 2016-11-11
+
+two:
+  cronofy_id: MyString
+  email: MyString
+  name: MyString
+  timezone: MyString
+  cronofy_access_token: MyString
+  cronofy_refresh_token: MyString
+  cronofy_access_token_expiration: 2016-11-11

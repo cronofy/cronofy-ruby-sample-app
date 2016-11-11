@@ -14,4 +14,4 @@
  *= require_self
  */
 @import "bootstrap.min.css";
-@import "_sample-app.css";
+@import "_sample-app.scss";

@@ -1,0 +1,5 @@
+<% if !logged_in? %>
+  <%= button_to "Log in", "/auth/cronofy", { class: 'btn btn-success btn-primary' } %>
+<% else %>
+  Logged In
+<% end %>
