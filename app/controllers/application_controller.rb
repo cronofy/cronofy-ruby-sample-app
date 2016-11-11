@@ -19,13 +19,4 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !current_user.nil?
   end
-
-  def cronofy_client
-    @cronofy ||= Cronofy::Client.new(
-        client_id: ENV['CRONOFY_CLIENT_ID'],
-        client_secret: ENV['CRONOFY_CLIENT_SECRET'],
-        access_token: current_user.cronofy_access_token,
-        refresh_token: current_user.cronofy_refresh_token
-    )
-  end
 end
