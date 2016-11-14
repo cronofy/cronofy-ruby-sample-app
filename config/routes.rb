@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'sessions#failure'
 
   resources :calendars, only: [:index, :show] do
-    resources :events, only: [:show]
+    resources :events, only: [:show, :new, :create]
   end
 end
