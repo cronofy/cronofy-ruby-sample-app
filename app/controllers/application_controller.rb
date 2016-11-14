@@ -19,4 +19,12 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !current_user.nil?
   end
+
+  def cronofy
+    @cronofy ||= CronofyClient.new(current_user)
+  end
+
+  def calendar_by_id(calendar_id)
+    cronofy.list_calendars.find { |calendar| calendar.calendar_id == calendar_id }
+  end
 end
