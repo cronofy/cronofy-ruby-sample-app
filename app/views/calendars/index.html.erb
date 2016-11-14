@@ -5,6 +5,7 @@
   <tr>
     <th>Account Profile</th>
     <th>Name</th>
+    <th></th>
   </tr>
   </thead>
 
@@ -16,6 +17,9 @@
         </td>
         <td>
           <%= calendar.calendar_name %>
+        </td>
+        <td>
+          <%= link_to "View", calendar_path(calendar.calendar_id) %>
         </td>
       </tr>
   <% end %>

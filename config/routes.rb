@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
   get '/auth/failure', to: 'sessions#failure'
 
-  resources :calendars, only: [:index]
+  resources :calendars, only: [:index, :show] do
+    resources :events, only: [:show]
+  end
 end

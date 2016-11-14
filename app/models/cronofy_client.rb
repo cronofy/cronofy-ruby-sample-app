@@ -10,6 +10,10 @@ class CronofyClient
     cronofy_request { cronofy.list_calendars }
   end
 
+  def read_events(calendar_id)
+    cronofy_request { cronofy.read_events(include_managed: true, calendar_ids: [calendar_id]) }
+  end
+
   private
 
   def cronofy

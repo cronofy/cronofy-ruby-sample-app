@@ -1,0 +1,31 @@
+<h2><%= @calendar.calendar_name %> - Events</h2>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Event Summary</th>
+    <th>Start</th>
+    <th>End</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @events.each do |event| %>
+      <tr>
+        <td>
+          <%= event.summary %>
+        </td>
+        <td>
+          <%= event.start.time %>
+        </td>
+        <td>
+          <%= event.end.time %>
+        </td>
+        <td>
+          <%= link_to "View", calendar_event_path(@calendar.calendar_id, event.event_uid) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
