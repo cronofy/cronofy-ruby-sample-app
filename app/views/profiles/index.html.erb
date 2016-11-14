@@ -1,7 +1,15 @@
 <h2>Calendars</h2>
 
 <% @account_profiles.each do |account_profile, calendars| %>
-    <h3><%= account_profile[:profile_name] %></h3>
+    <div class="row">
+      <div class="col-xs-8">
+        <h3><%= account_profile[:profile_name] %></h3>
+      </div>
+
+      <div class="col-xs-4 text-right">
+        <%= link_to "New Calendar", new_profile_calendar_path(account_profile[:profile_id]), { class: "btn btn-primary" } %>
+      </div>
+    </div>
 
     <table class="table table-striped table-hover">
       <thead>
@@ -18,7 +26,7 @@
               <%= calendar.calendar_name %>
             </td>
             <td>
-              <%= link_to "View", calendar_path(calendar.calendar_id) %>
+              <%= link_to "View", profile_calendar_path(account_profile[:profile_id], calendar.calendar_id) %>
             </td>
           </tr>
       <% end %>

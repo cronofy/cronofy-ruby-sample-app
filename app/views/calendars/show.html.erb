@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-xs-4 text-right">
-    <%= link_to "Create Event", new_calendar_event_path(@calendar.calendar_id), { class: "btn btn-primary" } %>
+    <%= link_to "Create Event", new_profile_calendar_event_path(params[:profile_id], @calendar.calendar_id), { class: "btn btn-primary" } %>
   </div>
 </div>
 
@@ -31,7 +31,7 @@
           <%= event.end.time %>
         </td>
         <td>
-          <%= link_to "View", calendar_event_path(@calendar.calendar_id, event.event_uid) %>
+          <%= link_to "View", profile_calendar_event_path(params[:profile_id], @calendar.calendar_id, event.event_uid) %>
         </td>
       </tr>
   <% end %>

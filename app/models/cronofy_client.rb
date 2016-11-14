@@ -18,6 +18,10 @@ class CronofyClient
     cronofy_request { cronofy.upsert_event(event.calendar_id, event.data) }
   end
 
+  def list_profiles
+    cronofy_request { cronofy.list_profiles }
+  end
+
   private
 
   def cronofy
