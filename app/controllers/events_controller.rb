@@ -21,6 +21,6 @@ class EventsController < ApplicationController
 
     cronofy.upsert_event(@event)
 
-    redirect_to calendar_path(id: @event.calendar_id)
+    redirect_to profile_calendar_path(profile_id: params[:profile_id], id: @event.calendar_id)
   end
 end
