@@ -5,9 +5,22 @@ class CalendarsController < ApplicationController
   end
 
   def new
-    @account_profile = cronofy.list_profiles.find { |profile| profile.profile_id == params[:id] }
+    @account_profile = cronofy.list_profiles.find { |profile| profile.profile_id == params[:profile_id] }
+
+    @calendar = Calendar.new
+    @calendar.profile_id = params[:profile_id]
   end
 
   def create
+    @calendar = Calendar.new(params[:calendar].permit!)
+
+    unless @calendar.valid?
+      @account_profile = cronofy.list_profiles.find { |profile| profile.profile_id == params[:profile_id] }
+      render :new and return
+    end
+
+    cronofy.create_calendar(@calendar)
+
+    redirect_to profiles_path
   end
 end

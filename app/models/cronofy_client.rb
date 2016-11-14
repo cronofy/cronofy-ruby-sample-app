@@ -22,6 +22,10 @@ class CronofyClient
     cronofy_request { cronofy.list_profiles }
   end
 
+  def create_calendar(calendar)
+    cronofy_request { cronofy.create_calendar(calendar.profile_id, calendar.name) }
+  end
+
   private
 
   def cronofy

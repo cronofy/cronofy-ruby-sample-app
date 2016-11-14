@@ -1,1 +1,34 @@
-New calendar
+<h2><%= @account_profile.profile_name %> - New Calendar</h2>
+
+<div class="well">
+  <% if @calendar.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% @calendar.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+
+  <%= form_for @calendar, url: { action: 'create' }, html: { class: 'form-horizontal' } do |f| %>
+      <%= f.hidden_field :profile_id %>
+
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label col-lg-2">Calendar Name</label>
+          <div class="col-lg-10">
+            <%= f.text_field :name, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-10">
+            <%= f.submit "Create", { class: 'btn btn-success btn-primary' } %>
+          </div>
+        </div>
+      </fieldset>
+  <% end %>
+</div>
+
