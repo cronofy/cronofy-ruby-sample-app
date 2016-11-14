@@ -17,6 +17,13 @@
 
       <fieldset>
         <div class="form-group">
+          <label class="control-label col-lg-2">Event ID</label>
+          <div class="col-lg-10">
+            <%= f.text_field :event_id, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
           <label class="control-label col-lg-2">Summary</label>
           <div class="col-lg-10">
             <%= f.text_field :summary, { class: 'form-control' } %>
@@ -33,14 +40,14 @@
         <div class="form-group">
           <label class="control-label col-lg-2">Start Time</label>
           <div class="col-lg-10">
-            <%= f.datetime_local_field :start_time, { class: 'form-control' } %>
+            <%= f.datetime_local_field :event_start, { class: 'form-control' } %>
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-lg-2">End Time</label>
           <div class="col-lg-10">
-            <%= f.datetime_local_field :end_time, { class: 'form-control' } %>
+            <%= f.datetime_local_field :event_end, { class: 'form-control' } %>
           </div>
         </div>
 

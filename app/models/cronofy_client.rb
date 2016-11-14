@@ -14,6 +14,10 @@ class CronofyClient
     cronofy_request { cronofy.read_events(include_managed: true, calendar_ids: [calendar_id]) }
   end
 
+  def upsert_event(event)
+    cronofy_request { cronofy.upsert_event(event.calendar_id, event.data) }
+  end
+
   private
 
   def cronofy
