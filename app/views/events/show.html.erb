@@ -1,1 +1,10 @@
-View Event
+<div class="row">
+  <div class="col-xs-8">
+    <h2><%= @calendar.calendar_name %> - <%= @event.summary %></h2>
+  </div>
+
+  <div class="col-xs-4 text-right">
+    <%= link_to "Update", "/", { class: "btn btn-primary" } %>
+    <%= button_to "Delete", @event, method: :delete %>
+  </div>
+</div>

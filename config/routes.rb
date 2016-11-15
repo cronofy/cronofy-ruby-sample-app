@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   resources :profiles, only: [:index] do
     resources :calendars, only: [:show, :new, :create] do
-      resources :events, only: [:show, :new, :create]
+      resources :events, only: [:show, :new, :create, :destroy]
     end
   end
 end

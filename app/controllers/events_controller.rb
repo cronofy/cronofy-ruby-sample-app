@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def show
-
+    @calendar = calendar_by_id(params[:calendar_id])
+    @event = cronofy.read_events(params[:calendar_id]).find { |event| event.event_uid == params[:id] }
   end
 
   def new
@@ -22,5 +23,11 @@ class EventsController < ApplicationController
     cronofy.upsert_event(@event)
 
     redirect_to profile_calendar_path(profile_id: params[:profile_id], id: @event.calendar_id)
+  end
+
+  def destroy
+    cronofy.delete_event(params[:calendar_id], params[:event_id])
+
+    redirect_to profile_calendar_path(profile_id: params[:profile_id], id: params[:calendar_id])
   end
 end

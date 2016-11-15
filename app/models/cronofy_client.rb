@@ -26,6 +26,10 @@ class CronofyClient
     cronofy_request { cronofy.create_calendar(calendar.profile_id, calendar.name) }
   end
 
+  def delete_event(calendar_id, event_uid)
+    cronofy_request { cronofy.delete_event(calendar_id, event_uid) }
+  end
+
   private
 
   def cronofy
