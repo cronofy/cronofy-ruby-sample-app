@@ -6,6 +6,7 @@ class Event
 
   attr_accessor :calendar_id,
                 :event_id,
+                :event_uid,
                 :summary,
                 :description,
                 :event_start,

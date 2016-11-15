@@ -1,19 +1,21 @@
 <div class="row">
   <div class="col-xs-8">
-    <h2><%= @calendar.calendar_name %> - <%= @event.summary %></h2>
+    <h2><%= @calendar.calendar_name %> - <%= @event.summary %> - Edit</h2>
   </div>
 
-  <div class="col-xs-4 text-right">
-    <%= link_to "Update", "/", { class: "btn btn-primary" } %>
-    <%= button_to "Delete", { action: :destroy, method: :delete }, { class: "btn btn-danger" } %>
-  </div>
+  <% if @event.event_id %>
+      <div class="col-xs-4 text-right">
+        <%= link_to "Edit", edit_profile_calendar_event_path(profile_id: params[:profile_id], calendar_id: params[:calendar_id], id: params[:id]), { class: "btn btn-primary" } %>
+        <%= button_to "Delete", profile_calendar_event_path(profile_id: params[:profile_id], calendar_id: params[:calendar_id], id: @event.event_id), method: :delete, class: "btn btn-danger" %>
+      </div>
+  <% end %>
 </div>
 
 <dl class="dl-horizontal">
-<% if @event.event_id %>
-  <dt>Event ID</dt>
-  <dd><%= @event.event_id %></dd>
-<% end %>
+  <% if @event.event_id %>
+      <dt>Event ID</dt>
+      <dd><%= @event.event_id %></dd>
+  <% end %>
 
   <dt>Event UID</dt>
   <dd><%= @event.event_uid %></dd>
@@ -33,4 +35,3 @@
   <dt>End Date</dt>
   <dd><%= @event.end.to_time %></dd>
 </dl>
-
