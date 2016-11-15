@@ -5,6 +5,32 @@
 
   <div class="col-xs-4 text-right">
     <%= link_to "Update", "/", { class: "btn btn-primary" } %>
-    <%= button_to "Delete", @event, method: :delete %>
+    <%= button_to "Delete", { action: :destroy, method: :delete }, { class: "btn btn-danger" } %>
   </div>
 </div>
+
+<dl class="dl-horizontal">
+<% if @event.event_id %>
+  <dt>Event ID</dt>
+  <dd><%= @event.event_id %></dd>
+<% end %>
+
+  <dt>Event UID</dt>
+  <dd><%= @event.event_uid %></dd>
+
+  <dt>Summary</dt>
+  <dd><%= @event.summary %></dd>
+
+  <dt>Created</dt>
+  <dd><%= @event.created %></dd>
+
+  <dt>Description</dt>
+  <dd><%= @event.description %></dd>
+
+  <dt>Start Date</dt>
+  <dd><%= @event.start.to_time %></dd>
+
+  <dt>End Date</dt>
+  <dd><%= @event.end.to_time %></dd>
+</dl>
+
