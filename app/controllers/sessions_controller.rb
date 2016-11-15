@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         flash[:error] = "Unrecognised provider login"
     end
 
-    redirect_to profiles_path
+    redirect_to root_path
   end
 
   def failure

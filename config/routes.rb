@@ -13,4 +13,6 @@ Rails.application.routes.draw do
       resources :events, only: [:show, :new, :create, :destroy, :edit, :update]
     end
   end
+
+  resources :channels, only: [:index]
 end
