@@ -30,6 +30,14 @@ class CronofyClient
     cronofy_request { cronofy.delete_event(calendar_id, event_uid) }
   end
 
+  def list_channels
+    cronofy_request { cronofy.list_channels }
+  end
+
+  def create_channel(channel)
+    cronofy_request { cronofy.create_channel(ENV['DOMAIN'] + "/push/#{channel.channel_id}", filters: { only_managed: channel.only_managed, calendar_ids: channel.calendar_ids }) }
+  end
+
   private
 
   def cronofy

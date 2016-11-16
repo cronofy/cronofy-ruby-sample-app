@@ -1,1 +1,35 @@
-Channels Index
+<div class="row">
+  <div class="col-xs-8">
+    <h2>Channels</h2>
+  </div>
+
+  <div class="col-xs-4 text-right">
+    <%= link_to "Create Channel", new_channel_path, { class: "btn btn-primary" } %>
+  </div>
+</div>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Channel ID</th>
+    <th>Path</th>
+    <th></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @channels.each do |channel| %>
+      <tr>
+        <td>
+          <%= channel.channel_id %>
+        </td>
+        <td>
+          <%= channel.callback_url %>
+        </td>
+        <td>
+          <%= link_to "View", channel_path(id: channel.channel_id) %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

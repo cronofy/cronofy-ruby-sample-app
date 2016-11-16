@@ -14,5 +14,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :channels, only: [:index]
+  resources :channels, only: [:index, :new, :create, :show]
 end

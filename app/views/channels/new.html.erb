@@ -1,0 +1,55 @@
+<h2>New Channel</h2>
+
+<div class="well">
+  <% if @channel.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% @channel.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+
+  <%= form_for @channel, url: { action: 'create' }, html: { class: 'form-horizontal' } do |f| %>
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label col-lg-2">Channel URL</label>
+          <div class="col-lg-10 channel-id">
+            <div class="col-xs-5 col-sm-4 col-md-3 text-right" style="margin-top: 8px"><%= ENV['DOMAIN'] %>/push/</div>
+            <div class="col-xs-7 col-sm-8 col-md-9">
+              <%= f.text_field :channel_id, { class: 'form-control' } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Interested Events</label>
+          <div class="col-lg-10 checkbox">
+            <label>
+              <%= f.check_box :only_managed %>
+              Only Managed
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Interested Calendars</label>
+          <div class="col-lg-10">
+            <%= f.collection_check_boxes :calendar_ids, @calendars, :calendar_id, :calendar_name do |b| %>
+                <div class="checkbox">
+                  <%= b.label { b.check_box + "#{b.object.profile_name} - #{b.object.calendar_name}" } %>
+                </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-10">
+            <%= f.submit "Create", { class: 'btn btn-success btn-primary' } %>
+          </div>
+        </div>
+      </fieldset>
+  <% end %>
+</div>
