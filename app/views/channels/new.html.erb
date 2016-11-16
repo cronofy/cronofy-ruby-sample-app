@@ -15,11 +15,11 @@
   <%= form_for @channel, url: { action: 'create' }, html: { class: 'form-horizontal' } do |f| %>
       <fieldset>
         <div class="form-group">
-          <label class="control-label col-lg-2">Channel URL</label>
+          <label class="control-label col-lg-2">Channel Path</label>
           <div class="col-lg-10 channel-id">
             <div class="col-xs-5 col-sm-4 col-md-3 text-right" style="margin-top: 8px"><%= ENV['DOMAIN'] %>/push/</div>
             <div class="col-xs-7 col-sm-8 col-md-9">
-              <%= f.text_field :channel_id, { class: 'form-control' } %>
+              <%= f.text_field :path, { class: 'form-control' } %>
             </div>
           </div>
         </div>

@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   end
 
   resources :channels, only: [:index, :new, :create, :show]
+
+  post '/push/:path', to: 'push#call'
 end

@@ -1,12 +1,6 @@
-class Channel
-  include ActiveModel::Model
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
-
-  attr_accessor :channel_id,
-                :only_managed,
+class Channel < ApplicationRecord
+  attr_accessor :only_managed,
                 :calendar_ids
 
-  validates :channel_id, presence: true
+  validates :path, presence: true
 end

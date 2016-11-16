@@ -25,7 +25,10 @@ class ChannelsController < ApplicationController
       render :new and return
     end
 
-    cronofy.create_channel(@channel)
+    channel = cronofy.create_channel(@channel)
+
+    @channel.channel_id = channel.channel_id
+    @channel.save
 
     redirect_to channels_path
   end
