@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user, :logged_in?
 
+  before_action :authorize
+
   def login(user)
     session[:user_id] = user.id
   end
@@ -26,5 +28,13 @@ class ApplicationController < ActionController::Base
 
   def calendar_by_id(calendar_id)
     cronofy.list_calendars.find { |calendar| calendar.calendar_id == calendar_id }
+  end
+
+  private
+
+  def authorize
+    unless logged_in?
+      redirect_to root_path
+    end
   end
 end
