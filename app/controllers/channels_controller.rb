@@ -34,6 +34,10 @@ class ChannelsController < ApplicationController
   end
 
   def show
+    @channel = cronofy.list_channels.find { |channel| channel.channel_id == params[:id] }
 
+    channel = Channel.find { |channel| channel.channel_id == params[:id] }
+    @channel.last_body = channel.last_body
+    @channel.last_called = channel.last_called
   end
 end

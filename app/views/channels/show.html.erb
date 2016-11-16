@@ -1,1 +1,31 @@
-Show Channel
+<div class="row">
+  <div class="col-xs-8">
+    <h2><%= @channel.channel_url %></h2>
+  </div>
+
+  <div class="col-xs-4 text-right">
+    <%#= button_to "Delete", profile_calendar_event_path(profile_id: params[:profile_id], calendar_id: params[:calendar_id], id: @event.event_id), method: :delete, class: "btn btn-danger" %>
+  </div>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Channel ID</dt>
+  <dd><%= @channel.channel_id %></dd>
+
+  <dt>Callback URL</dt>
+  <dd><%= @channel.callback_url %></dd>
+
+  <dt>Only Managed</dt>
+  <dd><%= @channel.filters.only_managed %></dd>
+
+  <% if @channel.filters.calendar_ids.any? %>
+      <dt>Calendar IDs</dt>
+      <dd><pre><%= @channel.filters.calendar_ids.join("\n") %></pre></dd>
+  <% end %>
+
+  <dt>Last Called</dt>
+  <dd><%= @channel.last_called %></dd>
+
+  <dt>Received Data</dt>
+  <dd><pre><%= @channel.last_body %></pre></dd>
+</dl>

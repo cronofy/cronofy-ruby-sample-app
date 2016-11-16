@@ -6,7 +6,8 @@ class PushController < ApplicationController
     channel = Channel.find { |channel| channel.path == params[:path] }
 
     unless channel.nil?
-      channel.last_body = "type: #{params[:notification][:type]}\nchanges_since: #{params[:notification][:changes_since]}\n\n" + channel.last_body.to_s
+      body = params[:notification].keys.map { |key| "#{key}: #{params[:notification][key]}" }.join("\n")
+      channel.last_body = "#{body}\n\n#{channel.last_body}"
       channel.last_called = Time.now
       channel.save
     end
