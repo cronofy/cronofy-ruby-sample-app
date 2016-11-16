@@ -1,0 +1,17 @@
+<h2>Domain Not Set</h2>
+
+<p>
+  You are seeing this message as you do not have a DOMAIN set in your project's environment variables. The DOMAIN should be the URL that your project is reachable by.
+</p>
+
+<p>
+  These are our suggested steps for if you are running this application locally:
+</p>
+
+<ol>
+  <li>Install <a href="https://ngrok.com/">ngrok</a></li>
+  <li>In the terminal run (replacing [url] with your local url): <pre><code>ngrok http -host-header=[url] [url]</code></pre></li>
+  <li>Add the displayed ngrok URL to your application's environment variables</li>
+  <li>Restart your application</li>
+  <li>Click through to the <%= link_to "create channel", new_channel_path %> page</li>
+</ol>

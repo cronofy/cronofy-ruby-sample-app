@@ -4,6 +4,10 @@ class ChannelsController < ApplicationController
   end
 
   def new
+    unless ENV['DOMAIN']
+      render :domain_not_set and return
+    end
+
     @channel = Channel.new
 
     @calendars = cronofy.list_calendars
