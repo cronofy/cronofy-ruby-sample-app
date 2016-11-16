@@ -38,6 +38,10 @@ class CronofyClient
     cronofy_request { cronofy.create_channel(ENV['DOMAIN'] + "/push/#{channel.path}", filters: { only_managed: channel.only_managed, calendar_ids: channel.calendar_ids }) }
   end
 
+  def close_channel(channel_id)
+    cronofy_request { cronofy.close_channel(channel_id) }
+  end
+
   private
 
   def cronofy

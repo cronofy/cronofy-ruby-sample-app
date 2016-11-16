@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :channels, only: [:index, :new, :create, :show]
+  resources :channels, only: [:index, :new, :create, :show, :destroy]
 
   post '/push/:path', to: 'push#call'
 end

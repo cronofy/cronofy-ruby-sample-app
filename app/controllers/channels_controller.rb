@@ -37,7 +37,16 @@ class ChannelsController < ApplicationController
     @channel = cronofy.list_channels.find { |channel| channel.channel_id == params[:id] }
 
     channel = Channel.find { |channel| channel.channel_id == params[:id] }
-    @channel.last_body = channel.last_body
-    @channel.last_called = channel.last_called
+
+    if channel
+      @channel.last_body = channel.last_body
+      @channel.last_called = channel.last_called
+    end
+  end
+
+  def destroy
+    cronofy.close_channel(params[:id])
+
+    redirect_to channels_path
   end
 end

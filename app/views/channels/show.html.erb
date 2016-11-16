@@ -4,7 +4,7 @@
   </div>
 
   <div class="col-xs-4 text-right">
-    <%#= button_to "Delete", profile_calendar_event_path(profile_id: params[:profile_id], calendar_id: params[:calendar_id], id: @event.event_id), method: :delete, class: "btn btn-danger" %>
+    <%= button_to "Close", channel_path(id: @channel.channel_id), method: :delete, class: "btn btn-danger" %>
   </div>
 </div>
 
@@ -23,9 +23,13 @@
       <dd><pre><%= @channel.filters.calendar_ids.join("\n") %></pre></dd>
   <% end %>
 
-  <dt>Last Called</dt>
-  <dd><%= @channel.last_called %></dd>
+  <% unless @channel.last_called.nil? %>
+      <dt>Last Called</dt>
+      <dd><%= @channel.last_called %></dd>
+  <% end %>
 
-  <dt>Received Data</dt>
-  <dd><pre><%= @channel.last_body %></pre></dd>
+  <% unless @channel.last_body.nil? %>
+      <dt>Received Data</dt>
+      <dd><pre><%= @channel.last_body %></pre></dd>
+  <% end %>
 </dl>
