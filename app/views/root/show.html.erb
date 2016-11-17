@@ -1,7 +1,3 @@
-<% if logged_in? %>
-    <%= link_to "Account Profiles", profiles_path %>
-    <br />
-    <%= link_to "Channels", channels_path %>
-<% else %>
-    <%= button_to "Log in", "/auth/cronofy", { class: 'btn btn-success btn-primary' } %>
-<% end %>
+<%= link_to "Account Profiles", profiles_path %>
+<br />
+<%= link_to "Channels", channels_path %>
