@@ -18,5 +18,7 @@ Rails.application.routes.draw do
 
   resources :free_busy, only: [:index]
 
+  resources :enterprise_connect
+
   post '/push/:path', to: 'push#call'
 end

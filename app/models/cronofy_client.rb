@@ -46,6 +46,10 @@ class CronofyClient
     cronofy_request { cronofy.free_busy }
   end
 
+  def resources
+    cronofy_request { cronofy.resources }
+  end
+
   private
 
   def cronofy

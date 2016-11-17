@@ -6,6 +6,11 @@ class SessionsController < ApplicationController
       when 'cronofy'
         process_cronofy(auth_hash)
         flash[:success] = "Connected to your calendars"
+      when 'cronofy_service_account'
+        process_cronofy_service_account(auth_hash)
+        flash.now[:success] = "Connected to your calendars"
+
+        redirect_to enterprise_connect_index_path and return
       else
         flash[:error] = "Unrecognised provider login"
     end
@@ -50,4 +55,15 @@ class SessionsController < ApplicationController
     login(user)
   end
 
+  def process_cronofy_service_account(auth_hash)
+    organization = Organization.find_or_create_by(cronofy_account_id: auth_hash['uid'])
+    organization.cronofy_account_id = auth_hash['uid']
+    organization.cronofy_access_token = auth_hash['credentials']['token']
+    organization.cronofy_refresh_token = auth_hash['credentials']['refresh_token']
+    organization.cronofy_access_token_expiration = Time.at(auth_hash['credentials']['expires_at']).getutc
+    organization.cronofy_domain = auth_hash['info']['domain']
+    organization.save
+
+    organization_login(organization)
+  end
 end

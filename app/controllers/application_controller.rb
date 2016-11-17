@@ -26,6 +26,22 @@ class ApplicationController < ActionController::Base
     @cronofy ||= CronofyClient.new(current_user)
   end
 
+  def current_organization
+    @current_organization ||= Organization.find_by(id: session[:organization_id])
+  end
+
+  def organization_cronofy
+    @organization_cronofy ||= CronofyClient.new(current_organization)
+  end
+
+  def organization_login(organization)
+    session[:organization_id] = organization.id
+  end
+
+  def organization_logged_in?
+    !current_organization.nil?
+  end
+
   def calendar_by_id(calendar_id)
     cronofy.list_calendars.find { |calendar| calendar.calendar_id == calendar_id }
   end
