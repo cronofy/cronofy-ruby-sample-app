@@ -42,6 +42,10 @@ class CronofyClient
     cronofy_request { cronofy.close_channel(channel_id) }
   end
 
+  def free_busy
+    cronofy_request { cronofy.free_busy }
+  end
+
   private
 
   def cronofy

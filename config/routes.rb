@@ -16,5 +16,7 @@ Rails.application.routes.draw do
 
   resources :channels, only: [:index, :new, :create, :show, :destroy]
 
+  resources :free_busy, only: [:index]
+
   post '/push/:path', to: 'push#call'
 end
