@@ -1,0 +1,45 @@
+<h2>Enterprise Connect - User Authorization</h2>
+
+<div class="well">
+  <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+
+  <%= form_for @user, url: { action: 'create' }, html: { class: 'form-horizontal' } do |f| %>
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label col-lg-2">User Email</label>
+          <div class="col-lg-10">
+            <%= f.text_field :email, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Scopes</label>
+          <div class="col-lg-10">
+            <%= f.text_field :scope, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Callback URL</label>
+          <div class="col-lg-10">
+            <%= f.text_field :callback_url, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-10">
+            <%= f.submit "Create", { class: 'btn btn-success btn-primary' } %>
+          </div>
+        </div>
+      </fieldset>
+  <% end %>
+</div>
