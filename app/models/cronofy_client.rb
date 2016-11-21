@@ -6,8 +6,16 @@ class CronofyClient
     @user = user
   end
 
+  def account
+    cronofy_request { cronofy.list_profiles }
+  end
+
   def list_calendars
     cronofy_request { cronofy.list_calendars }
+  end
+
+  def read_all_events
+    cronofy_request { cronofy.read_events(include_managed: true) }
   end
 
   def read_events(calendar_id)

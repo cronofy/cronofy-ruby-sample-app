@@ -39,6 +39,7 @@
   <tr>
     <th>Name</th>
     <th>Status</th>
+    <th></th>
   </tr>
   </thead>
 
@@ -50,6 +51,9 @@
         </td>
         <td>
           <%= user_status(user) %>
+        </td>
+        <td>
+          <%= link_to "View", service_account_user_path(id: user.id) %>
         </td>
       </tr>
   <% end %>

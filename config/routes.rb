@@ -24,4 +24,10 @@ Rails.application.routes.draw do
 
   post '/push/:path', to: 'push#call'
   post '/push/service_account_user/:user_id', to: 'push#service_account_user_call'
+
+  resources :service_account_users, only: [:show] do
+    resources :calendars, only: [:show, :new, :create], controller: 'service_account_user_calendars' do
+      resources :events, only: [:show, :new, :create, :destroy, :edit, :update], controller: 'service_account_user_events'
+    end
+  end
 end
