@@ -18,7 +18,10 @@ Rails.application.routes.draw do
 
   resources :free_busy, only: [:index]
 
-  resources :enterprise_connect, only: [:index, :new, :create]
+  resource :enterprise_connect, only: [:show, :new, :create] do
+    post '/service_accounts_auth_callback/:user_id', action: :service_account_auth_callback, as: :auth_callback
+  end
 
   post '/push/:path', to: 'push#call'
+  post '/push/service_account_user/:user_id', to: 'push#service_account_user_call'
 end

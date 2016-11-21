@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161117143924) do
+ActiveRecord::Schema.define(version: 20161121122613) do
 
   create_table "channels", force: :cascade do |t|
     t.text     "last_body"
@@ -39,8 +39,12 @@ ActiveRecord::Schema.define(version: 20161117143924) do
     t.string   "cronofy_access_token"
     t.string   "cronofy_refresh_token"
     t.date     "cronofy_access_token_expiration"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.boolean  "cronofy_is_service_account_token"
+    t.string   "cronofy_service_account_error_key"
+    t.string   "cronofy_service_account_error_description"
+    t.string   "cronofy_service_account_owner"
   end
 
 end

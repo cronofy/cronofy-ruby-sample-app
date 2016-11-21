@@ -50,8 +50,8 @@ class CronofyClient
     cronofy_request { cronofy.resources }
   end
 
-  def authorize_with_service_account(user)
-    cronofy_request { cronofy.authorize_with_service_account(user.email, user.scope, user.callback_url) }
+  def authorize_with_service_account(user, scopes, callback_url)
+    cronofy_request { cronofy.authorize_with_service_account(user.email, scopes, callback_url) }
   end
 
   private

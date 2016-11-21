@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         process_cronofy_service_account(auth_hash)
         flash.now[:success] = "Connected to your calendars"
 
-        redirect_to enterprise_connect_index_path and return
+        redirect_to enterprise_connect_path and return
       else
         flash[:error] = "Unrecognised provider login"
     end

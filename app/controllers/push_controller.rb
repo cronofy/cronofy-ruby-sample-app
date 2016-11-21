@@ -12,4 +12,8 @@ class PushController < ApplicationController
       channel.save
     end
   end
+
+  def service_account_user_call
+    logger.info("Hit push controller wo")
+  end
 end

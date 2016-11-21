@@ -12,32 +12,25 @@
   <% end %>
 
 
-  <%= form_for @user, url: { action: 'create' }, html: { class: 'form-horizontal' } do |f| %>
+  <%= form_tag enterprise_connect_path, class: 'form-horizontal' do |f| %>
       <fieldset>
         <div class="form-group">
           <label class="control-label col-lg-2">User Email</label>
           <div class="col-lg-10">
-            <%= f.text_field :email, { class: 'form-control' } %>
+            <%= text_field_tag :email, @user.email, { class: 'form-control' } %>
           </div>
         </div>
 
         <div class="form-group">
           <label class="control-label col-lg-2">Scopes</label>
           <div class="col-lg-10">
-            <%= f.text_field :scope, { class: 'form-control' } %>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label col-lg-2">Callback URL</label>
-          <div class="col-lg-10">
-            <%= f.text_field :callback_url, { class: 'form-control' } %>
+            <%= text_field_tag :scope, @scope, { class: 'form-control' } %>
           </div>
         </div>
 
         <div class="form-group">
           <div class="col-lg-10">
-            <%= f.submit "Create", { class: 'btn btn-success btn-primary' } %>
+            <%= submit_tag "Create", { class: 'btn btn-success btn-primary' } %>
           </div>
         </div>
       </fieldset>
