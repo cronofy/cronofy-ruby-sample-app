@@ -53,7 +53,9 @@
           <%= user_status(user) %>
         </td>
         <td>
-          <%= link_to "View", service_account_user_path(id: user.id) %>
+          <% if user.cronofy_access_token %>
+              <%= link_to "View", service_account_user_path(id: user.id) %>
+          <% end %>
         </td>
       </tr>
   <% end %>
