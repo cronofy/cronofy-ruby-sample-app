@@ -8,6 +8,7 @@ class EnterpriseConnectsController < ApplicationController
     end
 
     @resources = organization_cronofy.resources
+    @users = User.where(cronofy_service_account_owner: current_organization.cronofy_account_id)
   end
 
   def new
@@ -67,5 +68,17 @@ class EnterpriseConnectsController < ApplicationController
   rescue => e
     logger.fatal("#service_account_auth_callback failed with #{e.message} with body=#{request.body}")
     render text: "Failed", status: 500
+  end
+
+  helper_method :user_status
+  def user_status(user)
+    unless user.cronofy_service_account_error_key.nil?
+      "Failed"
+    end
+    if user.cronofy_access_token.nil?
+      "Pending"
+    else
+      "Linked"
+    end
   end
 end
