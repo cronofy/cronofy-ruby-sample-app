@@ -18,7 +18,7 @@
   <dt>Only Managed</dt>
   <dd><%= @channel.filters.only_managed %></dd>
 
-  <% if @channel.filters.calendar_ids.any? %>
+  <% if @channel.filters.calendar_ids and @channel.filters.calendar_ids.any? %>
       <dt>Calendar IDs</dt>
       <dd><pre><%= @channel.filters.calendar_ids.join("\n") %></pre></dd>
   <% end %>
