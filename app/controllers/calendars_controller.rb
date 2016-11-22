@@ -21,6 +21,8 @@ class CalendarsController < ApplicationController
 
     cronofy.create_calendar(@calendar)
 
+    logger.info { "Calendar created - name=#{@calendar.name} - profile.id = #{params[:profile_id]}"}
+
     redirect_to profiles_path
   end
 end
