@@ -2,6 +2,8 @@ class SessionsController < ApplicationController
   skip_before_action :authorize
 
   def create
+    logger.debug "OAuth callback called - auth_hash=#{auth_hash.inspect}"
+
     case auth_hash['provider']
       when 'cronofy'
         process_cronofy(auth_hash)
@@ -53,6 +55,8 @@ class SessionsController < ApplicationController
     user.save
 
     login(user)
+
+    logger.info "Cronofy OAuth login processed - user.id=#{user.id}"
   end
 
   def process_cronofy_service_account(auth_hash)
@@ -65,5 +69,7 @@ class SessionsController < ApplicationController
     organization.save
 
     organization_login(organization)
+
+    logger.info "Cronofy Service Account OAuth login processed - organization.id=#{organization.id}"
   end
 end
