@@ -76,13 +76,19 @@ class CronofyClient
   def cronofy_request(&block)
     block.call
   rescue Cronofy::AuthorizationFailureError => e
+    Rails.logger.warn "Error within cronofy_request - user.id=#{@user.id} - #{e.class} - #{e.message}"
+
     clear_cronofy_auth
 
     raise CredentialsInvalidError
   rescue Cronofy::AuthenticationFailureError => e
+    Rails.logger.warn "Error within cronofy_request - user.id=#{@user.id} - #{e.class} - #{e.message}"
+
     begin
       credentials = cronofy.refresh_access_token
     rescue Cronofy::BadRequestError => e
+      Rails.logger.warn "Error when refreshing access token - user.id=#{@user.id} - #{e.class} - #{e.message}"
+
       clear_cronofy_auth
 
       raise CredentialsInvalidError
@@ -92,6 +98,8 @@ class CronofyClient
     @user.cronofy_refresh_token = credentials.refresh_token
     @user.save
 
+    Rails.logger.info "New Cronofy authentication details set - user.id=#{@user.id}"
+
     cronofy_request(&block)
   end
 
@@ -99,5 +107,7 @@ class CronofyClient
     @user.cronofy_access_token = nil
     @user.cronofy_refresh_token = nil
     @user.save
+
+    Rails.logger.info "Cronofy authentication details cleared - user.id=#{@user.id}"
   end
 end
