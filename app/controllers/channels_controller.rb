@@ -30,6 +30,8 @@ class ChannelsController < ApplicationController
     @channel.channel_id = channel.channel_id
     @channel.save
 
+    logger.info { "Channel created - path=#{@channel.path} - only_managed=#{@channel.only_managed} - calendar_ids=#{@channel.calendar_ids.inspect}" }
+
     redirect_to channels_path
   end
 
