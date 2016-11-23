@@ -27,6 +27,8 @@ class EnterpriseConnectsController < ApplicationController
 
     organization_cronofy.authorize_with_service_account(@user, params[:scope], request.base_url + auth_callback_enterprise_connect_path(user_id: @user.id))
 
+    logger.info { "Authorize user with a service account - email=#{@user.email} - scope=#{params[:scope]} - user.id=#{@user.id}"}
+
     redirect_to enterprise_connect_path
   end
 
