@@ -2,6 +2,8 @@ class EnterpriseConnectsController < ApplicationController
   skip_before_filter  :verify_authenticity_token, only: :service_account_auth_callback
   skip_before_action :authorize, only: :service_account_auth_callback
 
+  before_action :verify_external_domain!
+
   def show
     unless organization_logged_in?
       render :login and return
@@ -31,7 +33,7 @@ class EnterpriseConnectsController < ApplicationController
   end
 
   def auth_callback_url(user)
-    "#{ENV['DOMAIN']}#{auth_callback_enterprise_connect_path(user_id: user.id)}"
+    "#{external_domain}#{auth_callback_enterprise_connect_path(user_id: user.id)}"
   end
 
   def service_account_auth_callback

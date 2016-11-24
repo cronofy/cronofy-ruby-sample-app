@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :external_domain, :logged_in?
 
   before_action :authorize
 
@@ -44,6 +44,16 @@ class ApplicationController < ActionController::Base
 
   def calendar_by_id(calendar_id)
     cronofy.list_calendars.find { |calendar| calendar.calendar_id == calendar_id }
+  end
+
+  def verify_external_domain!
+    unless external_domain
+      render template: 'shared/domain_not_set' and return
+    end
+  end
+
+  def external_domain
+    ENV['DOMAIN']
   end
 
   private
