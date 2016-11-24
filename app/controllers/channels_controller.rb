@@ -1,13 +1,12 @@
 class ChannelsController < ApplicationController
+
+  before_action :verify_external_domain!
+
   def index
     @channels = cronofy.list_channels
   end
 
   def new
-    unless ENV['DOMAIN']
-      render :domain_not_set and return
-    end
-
     @channel = Channel.new
 
     @calendars = cronofy.list_calendars
