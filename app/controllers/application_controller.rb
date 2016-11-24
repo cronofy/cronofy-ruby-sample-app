@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
-
   helper_method :current_user, :external_domain, :logged_in?
 
   before_action :authorize

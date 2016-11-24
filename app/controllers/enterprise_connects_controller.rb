@@ -1,5 +1,4 @@
 class EnterpriseConnectsController < ApplicationController
-  skip_before_filter  :verify_authenticity_token, only: :service_account_auth_callback
   skip_before_action :authorize, only: :service_account_auth_callback
 
   before_action :verify_external_domain!
@@ -14,12 +13,13 @@ class EnterpriseConnectsController < ApplicationController
   end
 
   def new
+    Rails.logger.debug "#{request.host}"
     @user = User.new
     @scope = 'read_account list_calendars read_events create_event delete_event read_free_busy'
   end
 
   def create
-    @user = User.new({ email: params[:email], cronofy_service_account_owner: current_organization.cronofy_account_id })
+    @user = User.find_or_initialize_by({ email: params[:email], cronofy_service_account_owner: current_organization.cronofy_account_id })
 
     unless @user.valid?
       render :new and return
