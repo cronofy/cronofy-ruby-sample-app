@@ -40,11 +40,11 @@ class EnterpriseConnectsController < ApplicationController
     user = User.find(params[:user_id])
     auth = params[:authorization]
 
-    if auth[:code]
-      logger.info ( "#service_account_auth_callback #{auth[:code]}" )
+    if auth['code']
+      logger.info ( "#service_account_auth_callback #{auth['code']}" )
 
       cronofy = Cronofy::Client.new
-      credentials = cronofy.get_token_from_code(auth[:code], request.url)
+      credentials = cronofy.get_token_from_code(auth['code'], auth_callback_url(user))
 
       user.cronofy_access_token = credentials.access_token
       user.cronofy_refresh_token = credentials.refresh_token
@@ -58,10 +58,10 @@ class EnterpriseConnectsController < ApplicationController
 
       logger.info ( "#service_account_auth_callback updated credentials for user=#{user.id}" )
 
-    elsif auth[:error]
+    elsif auth['error']
 
-      user.cronofy_service_account_error_key = auth[:error_key]
-      user.cronofy_service_account_error_description = auth[:error_description]
+      user.cronofy_service_account_error_key = auth['error_key']
+      user.cronofy_service_account_error_description = auth['error_description']
       user.save
 
       logger.warn ( "#service_account_auth_callback error with credentials for user=#{user.id}" )
@@ -70,21 +70,16 @@ class EnterpriseConnectsController < ApplicationController
       raise StandardError.new("Unexpected response payload auth=#{auth.inspect}")
     end
 
-    render text: "OK", status: 200
+    render plain: "OK", status: 200
   rescue => e
-    logger.fatal("#service_account_auth_callback failed with #{e.message} with body=#{request.body}")
-    render text: "Failed", status: 500
+    logger.fatal("#service_account_auth_callback failed with #{e.message} with body=#{request.body.read}")
+    render plain: "Failed", status: 500
   end
 
   helper_method :user_status
   def user_status(user)
-    unless user.cronofy_service_account_error_key.nil?
-      "Failed"
-    end
-    if user.cronofy_access_token.nil?
-      "Pending"
-    else
-      "Linked"
-    end
+    return "Linked" if !user.cronofy_access_token.blank?
+    return "Failed" if !user.cronofy_service_account_error_key.blank?
+    "Pending"
   end
 end
