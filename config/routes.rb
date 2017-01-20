@@ -16,7 +16,10 @@ Rails.application.routes.draw do
 
   resources :channels, only: [:index, :new, :create, :show, :destroy]
 
+  resources :availability, only: [:index]
   resources :free_busy, only: [:index]
+
+  get '/availability/account_id', controller: :availability, action: :account_id
 
   resource :enterprise_connect, only: [:show, :new, :create] do
     post '/service_accounts_auth_callback/:user_id', action: :service_account_auth_callback, as: :auth_callback

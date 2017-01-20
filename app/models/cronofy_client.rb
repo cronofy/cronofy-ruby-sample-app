@@ -3,14 +3,32 @@ class CronofyClient
   end
 
   def initialize(user)
-    Rails.logger.info { "Cronofy client initialized - user.id=#{user.id} - access_token=#{user.cronofy_access_token} - refresh_token=#{user.cronofy_refresh_token}" }
-    @user = user
+    if user
+      Rails.logger.info { "Cronofy client initialized - user.id=#{user.id} - access_token=#{user.cronofy_access_token} - refresh_token=#{user.cronofy_refresh_token}" }
+      @user = user
+    else
+      Rails.logger.info { "Cronofy client initialized - no user" }
+    end
   end
 
   def account
     Rails.logger.info { "Cronofy request - account" }
-    response = cronofy_request { cronofy.list_profiles }
+    response = cronofy_request { cronofy.account }
     Rails.logger.info { "Cronofy response - account - #{response.inspect}" }
+    response
+  end
+
+  def get_token_from_code(code, redirect_url)
+    Rails.logger.info { "Cronofy request - get_token_from_code" }
+    response = cronofy_request { cronofy.get_token_from_code(code, redirect_url) }
+    Rails.logger.info { "Cronofy response - get_token_from_code - #{response.inspect}" }
+    response
+  end
+
+  def user_auth_link(redirect_url, options)
+    Rails.logger.info { "Cronofy request - user_auth_link" }
+    response = cronofy_request { cronofy.user_auth_link(redirect_url, options) }
+    Rails.logger.info { "Cronofy response - user_auth_link - #{response.inspect}" }
     response
   end
 
@@ -104,8 +122,8 @@ class CronofyClient
     @cronofy ||= Cronofy::Client.new(
         client_id: ENV['CRONOFY_CLIENT_ID'],
         client_secret: ENV['CRONOFY_CLIENT_SECRET'],
-        access_token: @user.cronofy_access_token,
-        refresh_token: @user.cronofy_refresh_token
+        access_token: @user ? @user.cronofy_access_token : "",
+        refresh_token: @user ? @user.cronofy_refresh_token : ""
     )
   end
 
