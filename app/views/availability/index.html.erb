@@ -1,0 +1,98 @@
+<h2>Availability</h2>
+
+<div class="well">
+  <% if @availability.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% @availability.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+
+  <%= form_for @availability, url: { action: 'view'}, html: {class: 'form-horizontal' } do |f| %>
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label col-lg-2">Account ID 1</label>
+          <div class="col-lg-10">
+            <%= f.text_field :account_id_1, { class: 'form-control' } %>
+            <span class="help-block">Click <a href="<%= @auth_url %>" target="_blank">here</a> to find your Account ID</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Account ID 2</label>
+          <div class="col-lg-10">
+            <%= f.text_field :account_id_2, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Required Participants</label>
+          <div class="col-lg-10">
+            <%= f.select :required_participants, [1, 2, ['All', 'all']], {}, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Duration (Minutes)</label>
+          <div class="col-lg-10">
+            <%= f.text_field :duration, { type: 'number', class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Start Time</label>
+          <div class="col-lg-10">
+            <%= f.text_field :start_time, { type: 'datetime-local', class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">End Time</label>
+          <div class="col-lg-10">
+            <%= f.text_field :end_time, { type: 'datetime-local', class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-10">
+            <%= f.submit "Create", { class: 'btn btn-success btn-primary' } %>
+          </div>
+        </div>
+      </fieldset>
+  <% end %>
+</div>
+
+<% unless @available_periods.nil? %>
+    <table class="table table-striped table-hover">
+      <thead>
+      <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Participants</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @available_periods.each do |period| %>
+          <? for($i = 0; $i < count($availablePeriods); $i++){ ?>
+          <tr>
+            <td>
+              <%= period.start.to_time %>
+            </td>
+            <td>
+              <%= period.end.to_time %>
+            </td>
+            <td>
+              <% period.participants.each do |participant| %>
+                  <%= participant.sub %><br />
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% end %>

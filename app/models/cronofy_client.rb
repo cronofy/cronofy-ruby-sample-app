@@ -102,6 +102,13 @@ class CronofyClient
     response
   end
 
+  def availability(options)
+    Rails.logger.info { "Cronofy request - availability"}
+    response = cronofy_request { cronofy.availability(options) }
+    Rails.logger.info { "Cronofy response - availability - #{response.inspect}"}
+    response
+  end
+
   def resources
     Rails.logger.info { "Cronofy request - resources" }
     response = cronofy_request { cronofy.resources }

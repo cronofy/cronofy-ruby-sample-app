@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   resources :availability, only: [:index]
   resources :free_busy, only: [:index]
 
+  get '/availability', controller: :availability, action: :index
+  post '/availability', controller: :availability, action: :view
   get '/availability/account_id', controller: :availability, action: :account_id
 
   resource :enterprise_connect, only: [:show, :new, :create] do
