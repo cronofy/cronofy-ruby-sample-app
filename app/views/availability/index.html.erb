@@ -78,7 +78,6 @@
 
       <tbody>
       <% @available_periods.each do |period| %>
-          <? for($i = 0; $i < count($availablePeriods); $i++){ ?>
           <tr>
             <td>
               <%= period.start.to_time %>
