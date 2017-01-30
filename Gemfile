@@ -31,8 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'omniauth-cronofy'
-#gem 'cronofy'
-gem 'cronofy', git: 'https://github.com/cronofy/cronofy-ruby.git', :branch => 'availability'
+gem 'cronofy'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
