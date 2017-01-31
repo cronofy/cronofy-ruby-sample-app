@@ -47,10 +47,13 @@ class EventsController < ApplicationController
                            summary: event.summary,
                            description: event.description,
                            event_start: event.start.to_time,
-                           event_end: event.end.to_time,
-                           location_lat: event.location.lat,
-                           location_long: event.location.long
+                           event_end: event.end.to_time
                        })
+
+    if event.location
+      @event.location_lat = event.location.lat
+      @event.location_long = event.location.long
+    end
   end
 
   def update
