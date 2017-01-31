@@ -31,7 +31,7 @@ class Event
   end
 
   def geolocation_valid_if_present
-    return unless location_lat or location_long
+    return if location_lat.empty? and location_long.empty?
 
     if location_lat.empty?
       errors.add(:location_lat, "Latitude must be set if longitude is set")
@@ -75,7 +75,7 @@ class Event
         end: end_time
     }
 
-    if location_lat && location_long
+    unless location_lat.empty? && location_long.empty?
       event[:location] = {
           lat: location_lat,
           long: location_long
