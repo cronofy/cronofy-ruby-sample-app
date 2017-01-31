@@ -47,7 +47,9 @@ class EventsController < ApplicationController
                            summary: event.summary,
                            description: event.description,
                            event_start: event.start.to_time,
-                           event_end: event.end.to_time
+                           event_end: event.end.to_time,
+                           location_lat: event.location.lat,
+                           location_long: event.location.long
                        })
   end
 

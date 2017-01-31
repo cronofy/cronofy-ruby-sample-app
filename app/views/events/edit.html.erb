@@ -56,6 +56,19 @@
           </div>
         </div>
 
+        <% if @calendar.provider_name == "apple" || @calendar.provider_name == "google" %>
+            <div class="form-group">
+              <label class="control-label col-lg-2">Latitude</label>
+              <div class="col-lg-10">
+                <%= f.text_field :location_lat, { class: 'form-control' } %>
+              </div>
+              <label class="control-label col-lg-2">Longitude</label>
+              <div class="col-lg-10">
+                <%= f.text_field :location_long, { class: 'form-control' } %>
+              </div>
+            </div>
+        <% end %>
+
         <div class="form-group">
           <div class="col-lg-10">
             <%= f.submit "Update", { class: 'btn btn-success btn-primary' } %>
