@@ -32,6 +32,11 @@ class AvailabilityController < ApplicationController
     })
 
     render :index
+
+  rescue Cronofy::InvalidRequestError => e
+    @availability.invalid_request_error = JSON.parse(e.body)
+
+    render :index
   end
 
   def account_id

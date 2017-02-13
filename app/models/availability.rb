@@ -9,7 +9,8 @@ class Availability
                 :required_participants,
                 :duration,
                 :start_time,
-                :end_time
+                :end_time,
+                :invalid_request_error
 
   validates :account_id_1, presence: true
   validates :account_id_2, presence: true
