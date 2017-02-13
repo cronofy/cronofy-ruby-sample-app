@@ -8,6 +8,11 @@ class AvailabilityController < ApplicationController
 
   def view
     @availability = Availability.new(params[:availability].permit!)
+
+    unless @availability.valid?
+      render :index and return
+    end
+
     @available_periods = cronofy.availability({
         participants: [{
             members: [{
