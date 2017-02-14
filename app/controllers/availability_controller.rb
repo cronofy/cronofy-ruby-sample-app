@@ -18,23 +18,7 @@ class AvailabilityController < ApplicationController
       render :index and return
     end
 
-    @available_periods = cronofy.availability({
-        participants: [{
-            members: [{
-                sub: @availability.account_id_1,
-            },{
-                sub: @availability.account_id_2,
-            }],
-            required: @availability.required_participants,
-        }],
-        required_duration: {
-            minutes: @availability.duration
-        },
-        available_periods: [{
-            start: @availability.start_time.to_time,
-            end: @availability.end_time.to_time,
-        }]
-    })
+    @available_periods = cronofy.availability(@availability.data)
 
     render :index
 
