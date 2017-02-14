@@ -24,7 +24,6 @@
           <label class="control-label col-lg-2">Account ID 1</label>
           <div class="col-lg-10">
             <%= f.text_field :account_id_1, { class: 'form-control' } %>
-            <span class="help-block">Click <a href="<%= @auth_url %>" target="_blank">here</a> to find your Account ID</span>
           </div>
         </div>
 
@@ -32,6 +31,7 @@
           <label class="control-label col-lg-2">Account ID 2</label>
           <div class="col-lg-10">
             <%= f.text_field :account_id_2, { class: 'form-control' } %>
+            <span class="help-block">Send someone <a href="<%= @auth_url %>" target="_blank">this</a> to find their Account ID</span>
           </div>
         </div>
 
