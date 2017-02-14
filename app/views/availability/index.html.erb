@@ -11,6 +11,12 @@
       </div>
   <% end %>
 
+  <% if @availability.invalid_request_error %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h4>Invalid Request Error</h4>
+        <pre><%= JSON.pretty_generate(@availability.invalid_request_error) %></pre>
+      </div>
+  <% end %>
 
   <%= form_for @availability, url: { action: 'view'}, html: {class: 'form-horizontal' } do |f| %>
       <fieldset>

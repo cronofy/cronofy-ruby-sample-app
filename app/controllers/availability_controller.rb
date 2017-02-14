@@ -8,6 +8,11 @@ class AvailabilityController < ApplicationController
 
   def view
     @availability = Availability.new(params[:availability].permit!)
+
+    unless @availability.valid?
+      render :index and return
+    end
+
     @available_periods = cronofy.availability({
         participants: [{
             members: [{
@@ -25,6 +30,11 @@ class AvailabilityController < ApplicationController
             end: @availability.end_time.to_time,
         }]
     })
+
+    render :index
+
+  rescue Cronofy::InvalidRequestError => e
+    @availability.invalid_request_error = JSON.parse(e.body)
 
     render :index
   end

@@ -136,6 +136,10 @@ class CronofyClient
 
   def cronofy_request(&block)
     block.call
+  rescue Cronofy::InvalidRequestError => e
+    Rails.logger.warn "Error within cronofy_request - user.id=#{@user.id} - #{e.class} - #{e.message}"
+
+    raise
   rescue Cronofy::AuthorizationFailureError => e
     Rails.logger.warn "Error within cronofy_request - user.id=#{@user.id} - #{e.class} - #{e.message}"
 
