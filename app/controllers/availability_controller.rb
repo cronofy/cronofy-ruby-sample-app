@@ -2,7 +2,12 @@ class AvailabilityController < ApplicationController
   skip_before_action :authorize, only: [:account_id]
 
   def index
-    @availability = Availability.new(duration: '60')
+    @availability = Availability.new(
+        account_id_1: cronofy.account.account_id,
+        duration: '60',
+        start_time: (DateTime.current + 1.day).strftime("%Y-%m-%dT00:00"),
+        end_time: (DateTime.current + 2.days).strftime("%Y-%m-%dT00:00"),
+    )
     @auth_url = auth_url
   end
 
