@@ -17,14 +17,29 @@ class Event
   validates :calendar_id, presence: true
   validates :event_id, presence: true
   validates :summary, presence: true
-  validates :start_time, presence: true
-  validates :end_time, presence: true
 
-  validate :end_time_is_not_before_start_time
+  validate :times_are_present
+  validate :end_time_is_not_before_start_time if :times_are_present?
 
-  validate :geolocation_valid_if_present
+  def times_are_present
+    unless times_are_present?
+      if event_start.empty?
+        errors.add(:start_time, "must be present")
+      end
+
+      if event_end.empty?
+        errors.add(:end_time, "must be present")
+      end
+    end
+  end
+
+  def times_are_present?
+    !event_start.empty? and !event_end.empty?
+  end
 
   def end_time_is_not_before_start_time
+    return unless times_are_present?
+
     if start_time > end_time
       errors.add(:end_time, "can't be before the start time")
     end
