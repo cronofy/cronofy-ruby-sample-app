@@ -61,6 +61,10 @@ class EventsController < ApplicationController
 
     unless @event.valid?
       @calendar = calendar_by_id(@event.calendar_id)
+
+      @event.event_start = @event.start_time.to_time unless @event.event_start.empty?
+      @event.event_end = @event.end_time.to_time unless @event.event_end.empty?
+
       render :edit and return
     end
 
