@@ -21,6 +21,11 @@ class Event
   validate :times_are_present
   validate :end_time_is_not_before_start_time if :times_are_present?
 
+  with_options if: :geo_location_present? do |event|
+    event.validates :location_lat, numericality: { greater_than_or_equal_to: -85.05115, less_than_or_equal_to: 85.05115 }
+    event.validates :location_long, numericality: { greater_than_or_equal_to: -180, less_than_or_equal_to: 180 }
+  end
+
   def times_are_present
     unless times_are_present?
       if event_start.empty?
@@ -45,32 +50,8 @@ class Event
     end
   end
 
-  def geolocation_valid_if_present
-    return if location_lat.empty? and location_long.empty?
-
-    if location_lat.empty?
-      errors.add(:location_lat, "Latitude must be set if longitude is set")
-    else
-      if is_number?(location_lat)
-        if location_lat.to_i < -85.05115 || location_lat.to_i > 85.05115
-          errors.add(:location_lat, "Latitude must be between -85.05115 and 85.05115")
-        end
-      else
-        errors.add(:location_lat, "Latitude must be a float")
-      end
-    end
-
-    if location_long.empty?
-      errors.add(:location_long, "Longitude must be set if latitude is set")
-    else
-      if is_number?(location_long)
-        if location_long.to_i < -180 || location_long.to_i > 180
-          errors.add(:location_long, "Longitude must be between -180 and 180")
-        end
-      else
-        errors.add(:location_long, "Longitude must be a float")
-      end
-    end
+  def geo_location_present?
+    !location_lat.empty? or !location_long.empty?
   end
 
   def start_time
