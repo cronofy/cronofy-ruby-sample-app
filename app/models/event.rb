@@ -11,6 +11,7 @@ class Event
                 :description,
                 :event_start,
                 :event_end,
+                :location_description,
                 :location_lat,
                 :location_long
 
@@ -71,11 +72,13 @@ class Event
         end: end_time
     }
 
+    event[:location] = { description: location_description } if location_description
+
     unless location_lat.empty? && location_long.empty?
-      event[:location] = {
-          lat: location_lat,
-          long: location_long
-      }
+      event[:location] = {} if event[:location].nil?
+
+      event[:location][:lat] = location_lat
+      event[:location][:long] = location_long
     end
 
     event
