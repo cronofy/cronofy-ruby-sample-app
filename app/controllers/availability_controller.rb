@@ -20,8 +20,9 @@ class AvailabilityController < ApplicationController
 
     @available_periods = cronofy.availability(@availability.data)
 
-    render :index
+    @call_made = true
 
+    render :index
   rescue Cronofy::InvalidRequestError => e
     @availability.invalid_request_error = JSON.parse(e.body)
 
