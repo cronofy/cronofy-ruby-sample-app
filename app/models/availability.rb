@@ -13,7 +13,6 @@ class Availability
                 :invalid_request_error
 
   validates :account_id_1, presence: true
-  validates :account_id_2, presence: true
   validate :account_ids_differ
   validates :required_participants, inclusion: { in: %w{1 all}, message: "must be 1 or all" }
   validates :duration, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
@@ -57,20 +56,24 @@ class Availability
   end
 
   def data
-    {
+    params = {
         participants: {
             members: [{
                 sub: account_id_1,
-            },{
-                sub: account_id_2,
             }],
             required: required_participants,
         },
-        required_duration: duration,
+        required_duration: {
+            minutes: duration
+        },
         available_periods: [{
-            start: start_time,
-            end: end_time
+            start: start_time.to_time,
+            end: end_time.to_time
         }]
     }
+
+    params[:participants][:members] << { sub: account_id_2 } unless account_id_2.empty?
+
+    params
   end
 end
