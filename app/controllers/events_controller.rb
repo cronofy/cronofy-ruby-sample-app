@@ -47,8 +47,14 @@ class EventsController < ApplicationController
                            summary: event.summary,
                            description: event.description,
                            event_start: event.start.to_time,
-                           event_end: event.end.to_time
+                           event_end: event.end.to_time,
                        })
+
+    if event.location
+      @event.location_description = event.location.description
+      @event.location_lat = event.location.lat
+      @event.location_long = event.location.long
+    end
   end
 
   def update
@@ -56,6 +62,10 @@ class EventsController < ApplicationController
 
     unless @event.valid?
       @calendar = calendar_by_id(@event.calendar_id)
+
+      @event.event_start = @event.start_time.to_time unless @event.event_start.empty?
+      @event.event_end = @event.end_time.to_time unless @event.event_end.empty?
+
       render :edit and return
     end
 

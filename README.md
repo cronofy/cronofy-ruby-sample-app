@@ -38,6 +38,10 @@ Once you have ngrok installed you can initialise it for your application by usin
 
 Your terminal will then display a URL in the format `http://[unique identifier].ngrok.io`. You will need to set the `DOMAIN` variable in the application's `config/local_env.yml` in order to test these remote features.
 
+### Setting up Google Maps
+
+In order to view geo-location that has been set on events you will need to set the `GOOGLE_MAPS_EMBED_API_KEY` in the application's `config/local_env.yml` file. You can get your key from here by clicking "GET A KEY": [Google Maps Embed API](https://developers.google.com/maps/documentation/embed/guide)
+
 ## Example `config/local_env.yml` file
 
 Your complete `config/local_env.yml` file should look similar to this:
@@ -47,4 +51,6 @@ CRONOFY_CLIENT_ID: [cronofy client id]
 CRONOFY_CLIENT_SECRET: [cronofy client secret]
    
 DOMAIN: http://[ngrok identifier].ngrok.io
+ 
+GOOGLE_MAPS_EMBED_API_KEY: [google maps embed api key]
 ```
