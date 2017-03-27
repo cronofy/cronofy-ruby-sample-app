@@ -22,6 +22,10 @@ To use the Cronofy Ruby Sample App you need to create a Cronofy application. To 
 
 Once you've created your application you will need to set the `CRONOFY_CLIENT_ID` and `CRONOFY_CLIENT_SECRET` in the application's `config/local_env.yml` file.
 
+### Setting up the Database
+
+Open a terminal window, navigate it to your cloned repository, and run `rake db:migrate`. This is required to run the application.
+
 ### Deploying the Sample App
 
 Open a terminal window and navigate it to your cloned repository. Once there run `bundle install && rails server`, this will set up your project and run your application at `http://localhost:3000`.
