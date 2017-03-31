@@ -24,7 +24,7 @@ Once you've created your application you will need to set the `CRONOFY_CLIENT_ID
 
 ### Deploying the Sample App
 
-Open a terminal window and navigate it to your cloned repository. Once there run `bundle install && rails server`, this will set up your project and run your application at `http://localhost:3000`.
+Open a terminal window, navigate it to your cloned repository, and run `script/run`. This will set up your project and run your application at `http://localhost:3000`.
 
 ### Setting up a Remote URL
 
