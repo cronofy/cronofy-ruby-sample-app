@@ -52,7 +52,7 @@ class Event
   end
 
   def geo_location_present?
-    !location_lat.empty? or !location_long.empty?
+    !location_lat.blank? or !location_long.blank?
   end
 
   def start_time
@@ -74,7 +74,7 @@ class Event
 
     event[:location] = { description: location_description } if location_description
 
-    unless location_lat.empty? && location_long.empty?
+    unless geo_location_present?
       event[:location] = {} if event[:location].nil?
 
       event[:location][:lat] = location_lat
