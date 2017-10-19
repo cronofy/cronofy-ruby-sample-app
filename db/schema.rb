@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121122613) do
+ActiveRecord::Schema.define(version: 20171019170537) do
 
   create_table "channels", force: :cascade do |t|
     t.text     "last_body"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 20161121122613) do
     t.string   "cronofy_domain"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+  end
+
+  create_table "smart_invites", force: :cascade do |t|
+    t.string   "smart_invite_id"
+    t.string   "email"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: :cascade do |t|

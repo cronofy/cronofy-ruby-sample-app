@@ -123,6 +123,20 @@ class CronofyClient
     response
   end
 
+  def upsert_smart_invite(smart_invite)
+    Rails.logger.info { "Cronofy request - upsert_smart_invite - #{smart_invite.data}"}
+    response = cronofy_request { cronofy.upsert_smart_invite(smart_invite.data) }
+    Rails.logger.info { "Cronofy response - upsert_smart_invite - #{response.inspect}" }
+    response
+  end
+
+  def get_smart_invite(smart_invite_id, email)
+    Rails.logger.info { "Cronofy request - get_smart_invite - #{smart_invite_id} #{email}"}
+    response = cronofy_request { cronofy.get_smart_invite(smart_invite_id, email) }
+    Rails.logger.info { "Cronofy response - get_smart_invite - #{response.inspect}" }
+    response
+  end
+
   private
 
   def cronofy

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :channels, only: [:index, :new, :create, :show, :destroy]
+  resources :channels, only: [:index, :new, :create, :show]
+  resources :smart_invites, only: [:index, :new, :create, :show, :destroy]
 
   resources :availability, only: [:index]
   resources :free_busy, only: [:index]
@@ -29,6 +30,7 @@ Rails.application.routes.draw do
 
   post '/push/:path', to: 'push#call'
   post '/push/service_account_user/:user_id', to: 'push#service_account_user_call'
+  post '/push/smart_invite', to: 'push#smart_invite'
 
   resources :service_account_users, only: [:show] do
     resources :calendars, only: [:show, :new, :create], controller: 'service_account_user_calendars' do
