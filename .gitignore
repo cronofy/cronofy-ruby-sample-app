@@ -22,3 +22,4 @@
 
 # Ignore local environment variables
 /config/local_env.yml
+vendor

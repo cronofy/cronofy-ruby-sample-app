@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-xs-8">
+        <h2><%= @invite.smart_invite_id %> - Current status</h2>
+    </div>
+</div>
+
+<dl class="dl-horizontal">
+    <% @invite.replies.each do |reply| %>
+        <dt>Email</dt>
+        <dd><%= reply.email %></dd>
+
+        <dt>Status</dt>
+        <dd><%= reply.status %></dd>
+    <% end %>
+</dl>
