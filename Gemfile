@@ -32,8 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'omniauth-cronofy'
 
-gem 'cronofy', git: 'https://github.com/cronofy/cronofy-ruby.git', branch: 'smart-invites'
-#gem 'cronofy'
+gem 'cronofy'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
