@@ -15,4 +15,8 @@ class PushController < ApplicationController
   def service_account_user_call
     logger.info("Hit push controller wo")
   end
+
+  def smart_invite
+    logger.info("Recevied push notification from smart invite")
+  end
 end

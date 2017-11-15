@@ -1,0 +1,84 @@
+<h2>Create new Smart Invite</h2>
+
+<div class="well">
+  <% if @invite.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% @invite.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+
+  <%= form_for @invite, url: { action: 'create' }, html: { class: 'form-horizontal' } do |f| %>
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label col-lg-2">Smart Invite ID</label>
+          <div class="col-lg-10">
+            <%= f.text_field :smart_invite_id, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Attendee Email</label>
+          <div class="col-lg-10">
+            <%= f.text_field :email, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Summary</label>
+          <div class="col-lg-10">
+            <%= f.text_field :summary, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Description</label>
+          <div class="col-lg-10">
+            <%= f.text_area :description, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Start Time</label>
+          <div class="col-lg-10">
+            <%= f.datetime_local_field :event_start, { class: 'form-control', value: @invite.event_start.try(:strftime, '%Y-%m-%dT%H:%M:%S') }%>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">End Time</label>
+          <div class="col-lg-10">
+            <%= f.datetime_local_field :event_end, { class: 'form-control', value: @invite.event_end.try(:strftime, '%Y-%m-%dT%H:%M:%S') }%>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Location description</label>
+          <div class="col-lg-10">
+            <%= f.text_field :location_description, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Latitude</label>
+          <div class="col-lg-10">
+            <%= f.text_field :location_lat, { class: 'form-control' } %>
+          </div>
+          <label class="control-label col-lg-2">Longitude</label>
+          <div class="col-lg-10">
+            <%= f.text_field :location_long, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-10">
+            <%= f.submit "Create", { class: 'btn btn-success btn-primary' } %>
+          </div>
+        </div>
+      </fieldset>
+  <% end %>
+</div>

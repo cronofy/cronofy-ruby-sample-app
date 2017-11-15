@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'omniauth-cronofy'
+
 gem 'cronofy'
 
 group :development, :test do

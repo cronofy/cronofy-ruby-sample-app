@@ -1,0 +1,86 @@
+<div class="row">
+  <div class="col-xs-8">
+    <h2><%= @calendar.calendar_name %> - <%= @event.summary %></h2>
+  </div>
+</div>
+
+<div class="well">
+  <% if @event.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% @event.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+
+  <%= form_for @event, url: { action: :update }, method: :put, html: { class: 'form-horizontal' } do |f| %>
+      <%= f.hidden_field :calendar_id %>
+      <%= f.hidden_field :event_id %>
+      <%= f.hidden_field :event_uid %>
+
+      <fieldset>
+        <div class="form-group">
+          <label class="control-label col-lg-2">Event ID</label>
+          <div class="col-lg-10">
+            <%= f.text_field :event_id, { class: 'form-control', disabled: true } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Summary</label>
+          <div class="col-lg-10">
+            <%= f.text_field :summary, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Description</label>
+          <div class="col-lg-10">
+            <%= f.text_area :description, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Start Date</label>
+          <div class="col-lg-10">
+            <%= f.datetime_local_field :event_start, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">End Date</label>
+          <div class="col-lg-10">
+            <%= f.datetime_local_field :event_end, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-lg-2">Location description</label>
+          <div class="col-lg-10">
+            <%= f.text_field :location_description, { class: 'form-control' } %>
+          </div>
+        </div>
+
+        <% if @calendar.provider_name == "apple" || @calendar.provider_name == "google" %>
+            <div class="form-group">
+              <label class="control-label col-lg-2">Latitude</label>
+              <div class="col-lg-10">
+                <%= f.text_field :location_lat, { class: 'form-control' } %>
+              </div>
+              <label class="control-label col-lg-2">Longitude</label>
+              <div class="col-lg-10">
+                <%= f.text_field :location_long, { class: 'form-control' } %>
+              </div>
+            </div>
+        <% end %>
+
+        <div class="form-group">
+          <div class="col-lg-10">
+            <%= f.submit "Update", { class: 'btn btn-success btn-primary' } %>
+          </div>
+        </div>
+      </fieldset>
+  <% end %>
+</div>
