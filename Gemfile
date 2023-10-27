@@ -30,9 +30,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'omniauth-cronofy'
+gem 'omniauth-cronofy', '~> 0.12.0'
 
-gem 'cronofy'
+gem 'cronofy', '~> 0.37.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
