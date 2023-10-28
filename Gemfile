@@ -32,7 +32,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'omniauth-cronofy', '~> 0.12.0'
 
-gem 'cronofy', '~> 0.37.5'
+gem 'cronofy'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
